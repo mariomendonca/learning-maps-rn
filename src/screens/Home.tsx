@@ -1,31 +1,27 @@
 import React, { useState } from 'react';
 import { Alert, Dimensions, StyleSheet, Text, View } from 'react-native';
-import MapView, { Marker, Polygon } from 'react-native-maps';
+import MapView, { Circle, Marker, Polygon, Polyline } from 'react-native-maps';
 
 
 export function Home() {
   const { width, height } = Dimensions.get('window')
-  // -8.0458346,-34.8949036
+
   const [coords, setCoords] = useState({
     latitude: -8.0458346,
     longitude: -34.8949036,
   })
 
-
   return (
     <>
       {console.log(coords)}
       <View style={styles.container}>
-        {/* <Text>
-          {coords.latitude} - {coords.longitude}
-        </Text> */}
         <MapView
           style={{ width, height }}
           initialRegion={{
             latitude: -8.0458346,
             longitude: -34.8949036,
-            latitudeDelta: 0.03,
-            longitudeDelta: 0.03,
+            latitudeDelta: 0.2,
+            longitudeDelta: 0.2,
           }}
         // onRegionChange={(region) => console.log(region)}
         >
@@ -34,7 +30,7 @@ export function Home() {
             coordinate={coords}
             onDragEnd={(event) => setCoords(event.nativeEvent.coordinate)}
           />
-          <Polygon 
+          <Polygon
             coordinates={[
               {
                 latitude: -8.0458346,
@@ -57,13 +53,37 @@ export function Home() {
                 longitude: -34.9249036,
               },
               {
-                latitude: -8.0158346,
-                longitude: -34.9449036,
+                latitude: -8.0458346,
+                longitude: -34.9249036,
               },
             ]}
             tappable
             onPress={() => Alert.alert('tapped')}
             strokeWidth={5}
+            fillColor={'rgba(40,255,255,0.5)'}
+          />
+          <Circle
+            center={{
+              latitude: -8.0458346,
+              longitude: -34.9549036,
+            }}
+            radius={1000}
+            fillColor={'rgba(100,0,230,0.5)'}
+          />
+
+          <Polyline
+            coordinates={[
+              {
+                latitude: -8.1558346,
+                longitude: -34.9549036,
+              },
+              {
+                latitude: -8.1458346,
+                longitude: -34.8049036,
+              },
+            ]}
+            strokeWidth={3}
+            strokeColor={'red'}
           />
         </MapView>
       </View>
