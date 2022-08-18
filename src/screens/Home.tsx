@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Alert, Dimensions, StyleSheet, Text, View } from 'react-native';
-import MapView, { Circle, Marker, Polygon, Polyline } from 'react-native-maps';
+import MapView, { Circle, Marker, Polygon, Polyline, PROVIDER_GOOGLE } from 'react-native-maps';
 
 
 export function Home() {
   const { width, height } = Dimensions.get('window')
 
   const [coords, setCoords] = useState({
-    latitude: -8.0458346,
-    longitude: -34.8949036,
+    latitude: -8.04579511964922,
+    longitude: -34.89268776029348
   })
 
   return (
@@ -16,6 +16,7 @@ export function Home() {
       {console.log(coords)}
       <View style={styles.container}>
         <MapView
+          provider={PROVIDER_GOOGLE}
           style={{ width, height }}
           initialRegion={{
             latitude: -8.0458346,
@@ -61,7 +62,7 @@ export function Home() {
             onPress={() => Alert.alert('tapped')}
             strokeWidth={5}
             fillColor={'rgba(40,255,255,0.5)'}
-          />
+            />
           <Circle
             center={{
               latitude: -8.0458346,
